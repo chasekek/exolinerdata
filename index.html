@@ -2,53 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>exoliner baiter</title>
   <meta name="color-scheme" content="dark light" />
+
+  <!-- ✅ Social Media Rich Presence -->
+  <meta property="og:title" content="exoliner baiter" />
+  <meta property="og:description" content="Live dashboard of Exoliner data — updated every 5 seconds." />
+  <meta property="og:image" content="https://exo.loadingdev.qzz.io/logo.png" />
+  <meta property="og:url" content="https://exoliner.cryllix.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="exoliner baiter" />
+  <meta name="twitter:description" content="Live dashboard of Exoliner data — updated every 5 seconds." />
+  <meta name="twitter:image" content="https://exo.loadingdev.qzz.io/logo.png" />
+
   <style>
-    /* same glassmorphic styling */
+    /* === MOBILE FRIENDLY + GLASSMORPHIC === */
     :root{
       --bg:hsl(240 10% 6%);
-      --card:hsl(240 10% 12% / .6);
-      --glass:hsl(0 0% 100% / .06);
+      --card:hsl(240 10% 12%/.6);
+      --glass:hsl(0 0% 100%/.06);
       --text:hsl(0 0% 96%);
       --muted:hsl(0 0% 75%);
       --accent:hsl(270 95% 68%);
       --accent-2:hsl(190 95% 60%);
-      --shadow:0 10px 30px hsl(0 0% 0% / .35);
-      --radius:18px;--radius-sm:12px;--gap:clamp(.8rem,1vw,1.2rem);
+      --shadow:0 10px 30px hsl(0 0% 0%/.35);
+      --radius:18px;--radius-sm:12px;--gap:clamp(.8rem,2vw,1.2rem);
     }
-    body{margin:0;font:500 16px/1.45 ui-sans-serif,system-ui;color:var(--text);
+    body{
+      margin:0;font:500 clamp(14px,2.5vw,16px)/1.45 ui-sans-serif,system-ui;
+      color:var(--text);
       background:radial-gradient(1200px 800px at -10% -10%,hsl(270 80% 40%/.2),transparent 60%),
                  radial-gradient(1000px 700px at 110% 10%,hsl(200 90% 40%/.18),transparent 60%),
-                 linear-gradient(0deg,var(--bg),var(--bg));}
-    .wrapper{max-width:1200px;margin:0 auto;padding:20px;}
-    header{display:flex;gap:var(--gap);align-items:center;justify-content:space-between;margin-bottom:20px;}
-    .brand{display:flex;align-items:center;gap:.9rem;padding:10px 14px;
-      background:linear-gradient(to bottom right,var(--glass),transparent);backdrop-filter:blur(12px);
-      border:1px solid var(--glass);border-radius:var(--radius);box-shadow:var(--shadow);}
-    .logo{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 220deg,var(--accent),var(--accent-2));}
-    .controls{display:grid;gap:var(--gap);grid-template-columns:1fr minmax(170px,220px) minmax(170px,220px) auto;align-items:center;width:100%;}
-    input,select,button{width:100%;color:var(--text);background:linear-gradient(to bottom right,var(--glass),transparent);
-      border:1px solid var(--glass);border-radius:var(--radius-sm);padding:12px 14px;}
+                 linear-gradient(0deg,var(--bg),var(--bg));
+    }
+    .wrapper{max-width:1200px;margin:0 auto;padding:clamp(12px,3vw,20px);}
+    header{display:flex;flex-wrap:wrap;gap:var(--gap);align-items:center;justify-content:space-between;margin-bottom:clamp(12px,3vw,20px);}
+    .brand{display:flex;align-items:center;gap:.9rem;padding:8px 12px;background:linear-gradient(to bottom right,var(--glass),transparent);backdrop-filter:blur(12px);border:1px solid var(--glass);border-radius:var(--radius);box-shadow:var(--shadow);}
+    .logo{width:36px;height:36px;border-radius:12px;background:conic-gradient(from 220deg,var(--accent),var(--accent-2));}
+    .brand h1{font-size:clamp(1rem,4vw,1.3rem);margin:0;}
+    .controls{display:grid;gap:var(--gap);grid-template-columns:1fr;flex:1;min-width:220px;}
+    @media (min-width:700px){
+      .controls{grid-template-columns:1fr minmax(170px,220px) minmax(170px,220px) auto;}
+    }
+    input,select,button{width:100%;font-size:1rem;color:var(--text);background:linear-gradient(to bottom right,var(--glass),transparent);border:1px solid var(--glass);border-radius:var(--radius-sm);padding:12px 14px;}
     input::placeholder{color:var(--muted);}
-    button{cursor:pointer;font-weight:700;}
-    .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-top:18px;}
-    .card{overflow:hidden;border-radius:var(--radius);background:linear-gradient(to bottom right,var(--card),transparent);
-      border:1px solid var(--glass);box-shadow:var(--shadow);display:flex;flex-direction:column;}
+    button{cursor:pointer;font-weight:700;transition:.2s;}
+    button:hover{filter:brightness(1.1);}
+    .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fill,minmax(240px,1fr));margin-top:clamp(12px,2.5vw,18px);}
+    .card{overflow:hidden;border-radius:var(--radius);background:linear-gradient(to bottom right,var(--card),transparent);border:1px solid var(--glass);box-shadow:var(--shadow);display:flex;flex-direction:column;}
     .thumb{aspect-ratio:16/9;width:100%;object-fit:cover;background:#222;}
-    .content{padding:14px;display:flex;flex-direction:column;gap:10px;}
-    .title{font-weight:800;font-size:1.05rem}
-    .desc{color:var(--muted);font-size:.92rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
-    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
-    .pill{padding:6px 10px;border-radius:999px;border:1px solid var(--glass);
-      background:linear-gradient(to bottom right,var(--glass),transparent);}
-    .footer{display:flex;justify-content:space-between;padding:12px 14px;border-top:1px solid var(--glass);}
-    .empty{border:1px dashed var(--glass);border-radius:var(--radius);padding:40px;text-align:center;color:var(--muted);}
-    .kpi{display:flex;gap:var(--gap);flex-wrap:wrap;margin:12px 0 6px;}
-    .kpi .tile{flex:1 1 180px;padding:12px 14px;border-radius:var(--radius);border:1px solid var(--glass);
-      background:linear-gradient(to bottom right,var(--glass),transparent);box-shadow:var(--shadow);}
-    .tile .label{font-size:.8rem;color:var(--muted);margin-bottom:6px}
+    .content{padding:clamp(10px,2vw,14px);display:flex;flex-direction:column;gap:8px;}
+    .title{font-weight:800;font-size:clamp(.95rem,3vw,1.05rem)}
+    .desc{color:var(--muted);font-size:.9rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+    .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+    .pill{padding:4px 8px;border-radius:999px;border:1px solid var(--glass);background:linear-gradient(to bottom right,var(--glass),transparent);font-size:.85rem;}
+    .footer{display:flex;justify-content:space-between;padding:10px 12px;border-top:1px solid var(--glass);}
+    .empty{border:1px dashed var(--glass);border-radius:var(--radius);padding:20px;text-align:center;color:var(--muted);}
+    .kpi{display:flex;flex-wrap:wrap;gap:var(--gap);margin:12px 0 6px;}
+    .kpi .tile{flex:1 1 140px;padding:12px;border-radius:var(--radius);border:1px solid var(--glass);background:linear-gradient(to bottom right,var(--glass),transparent);box-shadow:var(--shadow);}
+    .tile .label{font-size:.8rem;color:var(--muted);}
     .tile .value{font-size:1.2rem;font-weight:800}
   </style>
 </head>
@@ -104,7 +117,7 @@
   <script>
     const JSON_URL = "https://exo.loadingdev.qzz.io";
     const REFRESH_MS = 5000;
-    let RAW = [], filtered = [], live = true, timer = null;
+    let RAW=[],filtered=[],live=true,timer=null;
 
     const grid=document.getElementById("grid"),empty=document.getElementById("empty"),tpl=document.getElementById("cardTemplate");
     const q=document.getElementById("q"),sortSel=document.getElementById("sort"),playersFilter=document.getElementById("playersFilter"),liveBtn=document.getElementById("liveBtn");
@@ -121,6 +134,7 @@
         kpiSync.textContent=new Date().toLocaleTimeString();
       }catch(e){console.error(e);}
     }
+
     function applyFilters(){
       const term=q.value.toLowerCase(),pf=playersFilter.value;
       filtered=RAW.filter(r=>{
@@ -133,35 +147,64 @@
       });
       sortNow();render();updateKPIs();
     }
+
     function sortNow(){
       const [key,dir]=sortSel.value.split(":"),d=dir==="desc"?-1:1;
       filtered.sort((a,b)=>((+a[key]||0)-(+b[key]||0))*d);
     }
+
     function updateKPIs(){
       const t=filtered.length,sum=filtered.reduce((a,r)=>a+(+r.players||0),0);
       kpiTotal.textContent=fmtInt(t);kpiSumPlayers.textContent=fmtInt(sum);kpiAvg.textContent=t?fmtInt(Math.round(sum/t)):0;
     }
+
     function render(){
-      grid.innerHTML="";if(!filtered.length){empty.hidden=false;return}else empty.hidden=true;
+      grid.innerHTML=""; 
+      if(!filtered.length){ empty.hidden=false; return } 
+      else empty.hidden=true;
       const frag=document.createDocumentFragment();
       for(const r of filtered){
         const n=tpl.content.firstElementChild.cloneNode(true);
-        n.querySelector(".thumb").src=r.thumbnail||"";n.querySelector(".thumb").alt=r.name;
+        n.querySelector(".thumb").src=r.thumbnail||""; 
+        n.querySelector(".thumb").alt=r.name;
         n.querySelector(".title").textContent=r.name;
         n.querySelector(".desc").textContent=r.description||"—";
         n.querySelector(".players").textContent=fmtInt(r.players);
         n.querySelector(".created").textContent=fmtDateTime(r.createdAt);
         n.querySelector(".updated").textContent=fmtDateTime(r.lastUpdated);
-        n.querySelector(".id").textContent=r.id||"";n.querySelector(".link").href=r.thumbnail||"#";
+        n.querySelector(".id").textContent=r.id||"";
+
+        // ✅ Dynamic Join Button
+        const joinLink = n.querySelector(".link");
+        const PLACE_ID = r.placeId || null; // Pull placeId from API
+        if(PLACE_ID){
+          joinLink.textContent = "Join Game";
+          joinLink.href = `roblox://placeID=${PLACE_ID}`;
+          joinLink.target = "_blank";
+          joinLink.addEventListener("click", e=>{
+            e.preventDefault();
+            window.location.href = `roblox://placeID=${PLACE_ID}`;
+            setTimeout(()=>{
+              window.open(`https://www.roblox.com/games/${PLACE_ID}/`,"_blank");
+            },500);
+          });
+        } else {
+          joinLink.textContent = "No Game Link";
+          joinLink.href = "#";
+        }
+
         frag.appendChild(n);
       }
       grid.appendChild(frag);
     }
+
     function toggleLive(){live=!live;liveBtn.textContent="Live: "+(live?"ON":"OFF");if(live)startTimer();else stopTimer();}
     function startTimer(){stopTimer();timer=setInterval(fetchJSON,REFRESH_MS);}
     function stopTimer(){if(timer)clearInterval(timer);}
-    q.addEventListener("input",applyFilters);sortSel.addEventListener("change",applyFilters);
-    playersFilter.addEventListener("change",applyFilters);liveBtn.addEventListener("click",toggleLive);
+    q.addEventListener("input",applyFilters);
+    sortSel.addEventListener("change",applyFilters);
+    playersFilter.addEventListener("change",applyFilters);
+    liveBtn.addEventListener("click",toggleLive);
     fetchJSON();startTimer();
   </script>
 </body>
