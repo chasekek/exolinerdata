@@ -63,6 +63,46 @@
     .kpi .tile{flex:1 1 140px;padding:12px;border-radius:var(--radius);border:1px solid var(--glass);background:linear-gradient(to bottom right,var(--glass),transparent);box-shadow:var(--shadow);}
     .tile .label{font-size:.8rem;color:var(--muted);}
     .tile .value{font-size:1.2rem;font-weight:800}
+    
+    /* Enhanced join button styling */
+    .join-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: inline-block;
+      text-align: center;
+      border: 1px solid transparent;
+      line-height: 1.2;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .join-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px hsla(270, 95%, 68%, 0.3);
+    }
+    
+    .join-btn:active {
+      transform: translateY(0);
+    }
+    
+    .join-btn.disabled {
+      background: linear-gradient(135deg, hsl(0, 0%, 30%), hsl(0, 0%, 25%));
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    
+    .join-btn.disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
   </style>
 </head>
 <body>
@@ -109,7 +149,10 @@
             <div class="pill">🛠️ <span class="updated">—</span></div>
           </div>
         </div>
-        <div class="footer"><div class="id"></div><a class="link" target="_blank">Open</a></div>
+        <div class="footer">
+          <div class="id"></div>
+          <a class="join-btn" target="_blank">🎮 Join Game</a>
+        </div>
       </article>
     </template>
   </div>
@@ -158,6 +201,32 @@
       kpiTotal.textContent=fmtInt(t);kpiSumPlayers.textContent=fmtInt(sum);kpiAvg.textContent=t?fmtInt(Math.round(sum/t)):0;
     }
 
+    function joinRobloxGame(placeId, gameName) {
+      if (!placeId) {
+        alert('No game ID available for this game');
+        return;
+      }
+
+      // Try to open Roblox client first
+      const robloxUrl = `roblox://placeID=${placeId}`;
+      const webUrl = `https://www.roblox.com/games/${placeId}/`;
+      
+      // Create a temporary link to trigger Roblox protocol
+      const tempLink = document.createElement('a');
+      tempLink.href = robloxUrl;
+      tempLink.style.display = 'none';
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      
+      // Fallback to web version after a delay
+      setTimeout(() => {
+        if (confirm(`If Roblox didn't open automatically, would you like to open ${gameName} in your browser instead?`)) {
+          window.open(webUrl, '_blank');
+        }
+      }, 1500);
+    }
+
     function render(){
       grid.innerHTML=""; 
       if(!filtered.length){ empty.hidden=false; return } 
@@ -174,23 +243,25 @@
         n.querySelector(".updated").textContent=fmtDateTime(r.lastUpdated);
         n.querySelector(".id").textContent=r.id||"";
 
-        // ✅ Dynamic Join Button
-        const joinLink = n.querySelector(".link");
-        const PLACE_ID = r.placeId || null; // Pull placeId from API
-        if(PLACE_ID){
-          joinLink.textContent = "Join Game";
-          joinLink.href = `roblox://placeID=${PLACE_ID}`;
-          joinLink.target = "_blank";
-          joinLink.addEventListener("click", e=>{
+        // Enhanced Join Game Button
+        const joinBtn = n.querySelector(".join-btn");
+        const gameId = r.placeId || r.id || null;
+        
+        if (gameId) {
+          joinBtn.href = "#";
+          joinBtn.onclick = (e) => {
             e.preventDefault();
-            window.location.href = `roblox://placeID=${PLACE_ID}`;
-            setTimeout(()=>{
-              window.open(`https://www.roblox.com/games/${PLACE_ID}/`,"_blank");
-            },500);
-          });
+            joinRobloxGame(gameId, r.name);
+          };
+          joinBtn.title = `Join ${r.name} (ID: ${gameId})`;
         } else {
-          joinLink.textContent = "No Game Link";
-          joinLink.href = "#";
+          joinBtn.textContent = "❌ No Game ID";
+          joinBtn.classList.add('disabled');
+          joinBtn.onclick = (e) => {
+            e.preventDefault();
+            alert('This game does not have a valid Roblox game ID');
+          };
+          joinBtn.title = "Game ID not available";
         }
 
         frag.appendChild(n);
