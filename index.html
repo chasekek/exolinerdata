@@ -6,65 +6,48 @@
   <title>exoliner baiter</title>
   <meta name="color-scheme" content="dark light" />
   <style>
-    /* === MODERN GLASSMORPHIC STYLING === */
+    /* same glassmorphic styling */
     :root{
-      --bg: hsl(240 10% 6%);
-      --card: hsl(240 10% 12% / .6);
-      --glass: hsl(0 0% 100% / .06);
-      --text: hsl(0 0% 96%);
-      --muted: hsl(0 0% 75%);
-      --accent: hsl(270 95% 68%);
-      --accent-2: hsl(190 95% 60%);
-      --ok: hsl(150 70% 45%);
-      --warn: hsl(35 95% 55%);
-      --err: hsl(355 80% 60%);
-      --shadow: 0 10px 30px hsl(0 0% 0% / .35);
-      --radius: 18px;
-      --radius-sm: 12px;
-      --gap: clamp(.8rem, 1vw, 1.2rem);
+      --bg:hsl(240 10% 6%);
+      --card:hsl(240 10% 12% / .6);
+      --glass:hsl(0 0% 100% / .06);
+      --text:hsl(0 0% 96%);
+      --muted:hsl(0 0% 75%);
+      --accent:hsl(270 95% 68%);
+      --accent-2:hsl(190 95% 60%);
+      --shadow:0 10px 30px hsl(0 0% 0% / .35);
+      --radius:18px;--radius-sm:12px;--gap:clamp(.8rem,1vw,1.2rem);
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg: hsl(0 0% 98%);
-        --card: hsl(0 0% 100% / .7);
-        --glass: hsl(0 0% 0% / .04);
-        --text: hsl(240 6% 10%);
-        --muted: hsl(240 4% 35%);
-      }
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font: 500 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 800px at -10% -10%, hsl(270 80% 40% / .2), transparent 60%),
-        radial-gradient(1000px 700px at 110% 10%, hsl(200 90% 40% / .18), transparent 60%),
-        linear-gradient(0deg, var(--bg), var(--bg));
-      min-height:100%;
-    }
+    body{margin:0;font:500 16px/1.45 ui-sans-serif,system-ui;color:var(--text);
+      background:radial-gradient(1200px 800px at -10% -10%,hsl(270 80% 40%/.2),transparent 60%),
+                 radial-gradient(1000px 700px at 110% 10%,hsl(200 90% 40%/.18),transparent 60%),
+                 linear-gradient(0deg,var(--bg),var(--bg));}
     .wrapper{max-width:1200px;margin:0 auto;padding:20px;}
     header{display:flex;gap:var(--gap);align-items:center;justify-content:space-between;margin-bottom:20px;}
-    .brand{display:flex;align-items:center;gap:.9rem;padding:10px 14px;background:linear-gradient(to bottom right,var(--glass),transparent);backdrop-filter:blur(12px);border:1px solid var(--glass);border-radius:var(--radius);box-shadow:var(--shadow);}
+    .brand{display:flex;align-items:center;gap:.9rem;padding:10px 14px;
+      background:linear-gradient(to bottom right,var(--glass),transparent);backdrop-filter:blur(12px);
+      border:1px solid var(--glass);border-radius:var(--radius);box-shadow:var(--shadow);}
     .logo{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 220deg,var(--accent),var(--accent-2));}
-    .brand h1{font-size:clamp(1rem,2vw,1.25rem);margin:0;}
     .controls{display:grid;gap:var(--gap);grid-template-columns:1fr minmax(170px,220px) minmax(170px,220px) auto;align-items:center;width:100%;}
-    input,select,button{width:100%;appearance:none;color:var(--text);background:linear-gradient(to bottom right,var(--glass),transparent);border:1px solid var(--glass);border-radius:var(--radius-sm);padding:12px 14px;outline:none;}
+    input,select,button{width:100%;color:var(--text);background:linear-gradient(to bottom right,var(--glass),transparent);
+      border:1px solid var(--glass);border-radius:var(--radius-sm);padding:12px 14px;}
     input::placeholder{color:var(--muted);}
-    button{cursor:pointer;font-weight:700;transition:.2s;}
-    button:hover{filter:brightness(1.1);}
+    button{cursor:pointer;font-weight:700;}
     .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-top:18px;}
-    .card{overflow:hidden;border-radius:var(--radius);background:linear-gradient(to bottom right,var(--card),transparent);border:1px solid var(--glass);box-shadow:var(--shadow);display:flex;flex-direction:column;}
+    .card{overflow:hidden;border-radius:var(--radius);background:linear-gradient(to bottom right,var(--card),transparent);
+      border:1px solid var(--glass);box-shadow:var(--shadow);display:flex;flex-direction:column;}
     .thumb{aspect-ratio:16/9;width:100%;object-fit:cover;background:#222;}
     .content{padding:14px;display:flex;flex-direction:column;gap:10px;}
-    .title{font-weight:800;line-height:1.2;font-size:1.05rem}
-    .desc{color:var(--muted);font-size:.92rem;max-height:4.4em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;}
+    .title{font-weight:800;font-size:1.05rem}
+    .desc{color:var(--muted);font-size:.92rem;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
     .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
-    .pill{padding:6px 10px;border-radius:999px;border:1px solid var(--glass);background:linear-gradient(to bottom right,var(--glass),transparent);}
-    .footer{display:flex;gap:10px;margin-top:auto;justify-content:space-between;padding:12px 14px;border-top:1px solid var(--glass);}
+    .pill{padding:6px 10px;border-radius:999px;border:1px solid var(--glass);
+      background:linear-gradient(to bottom right,var(--glass),transparent);}
+    .footer{display:flex;justify-content:space-between;padding:12px 14px;border-top:1px solid var(--glass);}
     .empty{border:1px dashed var(--glass);border-radius:var(--radius);padding:40px;text-align:center;color:var(--muted);}
     .kpi{display:flex;gap:var(--gap);flex-wrap:wrap;margin:12px 0 6px;}
-    .kpi .tile{flex:1 1 180px;padding:12px 14px;border-radius:var(--radius);border:1px solid var(--glass);background:linear-gradient(to bottom right,var(--glass),transparent);box-shadow:var(--shadow);}
+    .kpi .tile{flex:1 1 180px;padding:12px 14px;border-radius:var(--radius);border:1px solid var(--glass);
+      background:linear-gradient(to bottom right,var(--glass),transparent);box-shadow:var(--shadow);}
     .tile .label{font-size:.8rem;color:var(--muted);margin-bottom:6px}
     .tile .value{font-size:1.2rem;font-weight:800}
   </style>
@@ -119,90 +102,67 @@
   </div>
 
   <script>
-    const JSON_URL = "https://raw.githubusercontent.com/chasekek/exolinerdata/refs/heads/main/full_gamelist_dump.json";
-    const REFRESH_MS = 30000;
+    const JSON_URL = "https://exo.loadingdev.qzz.io";
+    const REFRESH_MS = 5000;
     let RAW = [], filtered = [], live = true, timer = null;
 
-    const grid = document.getElementById("grid");
-    const empty = document.getElementById("empty");
-    const tpl = document.getElementById("cardTemplate");
-    const q = document.getElementById("q");
-    const sortSel = document.getElementById("sort");
-    const playersFilter = document.getElementById("playersFilter");
-    const liveBtn = document.getElementById("liveBtn");
-    const kpiTotal = document.getElementById("kpiTotal");
-    const kpiSumPlayers = document.getElementById("kpiSumPlayers");
-    const kpiAvg = document.getElementById("kpiAvg");
-    const kpiSync = document.getElementById("kpiSync");
+    const grid=document.getElementById("grid"),empty=document.getElementById("empty"),tpl=document.getElementById("cardTemplate");
+    const q=document.getElementById("q"),sortSel=document.getElementById("sort"),playersFilter=document.getElementById("playersFilter"),liveBtn=document.getElementById("liveBtn");
+    const kpiTotal=document.getElementById("kpiTotal"),kpiSumPlayers=document.getElementById("kpiSumPlayers"),kpiAvg=document.getElementById("kpiAvg"),kpiSync=document.getElementById("kpiSync");
 
-    const fmtInt = n=>new Intl.NumberFormat().format(n||0);
-    const fmtDateTime=s=>s?new Date(s).toLocaleString():"—";
+    const fmtInt=n=>new Intl.NumberFormat().format(n||0),fmtDateTime=s=>s?new Date(s).toLocaleString():"—";
 
     async function fetchJSON(){
       try{
-        const res = await fetch(JSON_URL+"?_ts="+Date.now());
-        const data = await res.json();
-        RAW = Array.isArray(data)?data:(Array.isArray(data?.data)?data.data:[]);
+        const res=await fetch(JSON_URL+"?_ts="+Date.now());
+        const data=await res.json();
+        RAW=Array.isArray(data)?data:(Array.isArray(data?.data)?data.data:[]);
         applyFilters();
-        kpiSync.textContent = new Date().toLocaleTimeString();
+        kpiSync.textContent=new Date().toLocaleTimeString();
       }catch(e){console.error(e);}
     }
-
     function applyFilters(){
-      const term=q.value.toLowerCase(), pf=playersFilter.value;
+      const term=q.value.toLowerCase(),pf=playersFilter.value;
       filtered=RAW.filter(r=>{
         const hay=(r.name+" "+(r.description||"")).toLowerCase();
         const passTerm=term?hay.includes(term):true;
         const p=+r.players||0;
         let passPlayers=true;
-        if(pf==="gt0")passPlayers=p>0;
-        else if(pf==="gte50")passPlayers=p>=50;
-        else if(pf==="gte100")passPlayers=p>=100;
+        if(pf==="gt0")passPlayers=p>0;else if(pf==="gte50")passPlayers=p>=50;else if(pf==="gte100")passPlayers=p>=100;
         return passTerm&&passPlayers;
       });
-      sortNow(); render(); updateKPIs();
+      sortNow();render();updateKPIs();
     }
     function sortNow(){
-      const [key,dir]=sortSel.value.split(":");
-      const d=dir==="desc"?-1:1;
+      const [key,dir]=sortSel.value.split(":"),d=dir==="desc"?-1:1;
       filtered.sort((a,b)=>((+a[key]||0)-(+b[key]||0))*d);
     }
     function updateKPIs(){
-      const t=filtered.length, sum=filtered.reduce((a,r)=>a+(+r.players||0),0);
-      kpiTotal.textContent=fmtInt(t);
-      kpiSumPlayers.textContent=fmtInt(sum);
-      kpiAvg.textContent=t?fmtInt(Math.round(sum/t)):0;
+      const t=filtered.length,sum=filtered.reduce((a,r)=>a+(+r.players||0),0);
+      kpiTotal.textContent=fmtInt(t);kpiSumPlayers.textContent=fmtInt(sum);kpiAvg.textContent=t?fmtInt(Math.round(sum/t)):0;
     }
     function render(){
-      grid.innerHTML="";
-      if(!filtered.length){empty.hidden=false;return}else empty.hidden=true;
+      grid.innerHTML="";if(!filtered.length){empty.hidden=false;return}else empty.hidden=true;
       const frag=document.createDocumentFragment();
       for(const r of filtered){
         const n=tpl.content.firstElementChild.cloneNode(true);
-        n.querySelector(".thumb").src=r.thumbnail||"";
-        n.querySelector(".thumb").alt=r.name;
+        n.querySelector(".thumb").src=r.thumbnail||"";n.querySelector(".thumb").alt=r.name;
         n.querySelector(".title").textContent=r.name;
         n.querySelector(".desc").textContent=r.description||"—";
         n.querySelector(".players").textContent=fmtInt(r.players);
         n.querySelector(".created").textContent=fmtDateTime(r.createdAt);
         n.querySelector(".updated").textContent=fmtDateTime(r.lastUpdated);
-        n.querySelector(".id").textContent=r.id||"";
-        n.querySelector(".link").href=r.thumbnail||"#";
+        n.querySelector(".id").textContent=r.id||"";n.querySelector(".link").href=r.thumbnail||"#";
         frag.appendChild(n);
       }
       grid.appendChild(frag);
     }
-    function toggleLive(){
-      live=!live;liveBtn.textContent="Live: "+(live?"ON":"OFF");
-      if(live)startTimer();else stopTimer();
-    }
+    function toggleLive(){live=!live;liveBtn.textContent="Live: "+(live?"ON":"OFF");if(live)startTimer();else stopTimer();}
     function startTimer(){stopTimer();timer=setInterval(fetchJSON,REFRESH_MS);}
     function stopTimer(){if(timer)clearInterval(timer);}
-    q.addEventListener("input",()=>applyFilters());
-    sortSel.addEventListener("change",applyFilters);
-    playersFilter.addEventListener("change",applyFilters);
-    liveBtn.addEventListener("click",toggleLive);
-    fetchJSON(); startTimer();
+    q.addEventListener("input",applyFilters);sortSel.addEventListener("change",applyFilters);
+    playersFilter.addEventListener("change",applyFilters);liveBtn.addEventListener("click",toggleLive);
+    fetchJSON();startTimer();
   </script>
 </body>
 </html>
