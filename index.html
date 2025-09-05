@@ -6,6 +6,7 @@
   <title>exoliner baiter</title>
   <meta name="color-scheme" content="dark light" />
   <style>
+    /* === MODERN GLASSMORPHIC STYLING === */
     :root{
       --bg: hsl(240 10% 6%);
       --card: hsl(240 10% 12% / .6);
@@ -32,10 +33,9 @@
       }
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
-      font: 500 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      font: 500 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
       color:var(--text);
       background:
         radial-gradient(1200px 800px at -10% -10%, hsl(270 80% 40% / .2), transparent 60%),
@@ -43,184 +43,63 @@
         linear-gradient(0deg, var(--bg), var(--bg));
       min-height:100%;
     }
-    .wrapper{
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header{
-      display:flex; gap:var(--gap); align-items:center; justify-content:space-between;
-      margin-bottom:20px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:.9rem;
-      padding:10px 14px;
-      background: linear-gradient( to bottom right, var(--glass), transparent);
-      backdrop-filter: blur(12px);
-      border:1px solid var(--glass);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .logo{
-      width:40px; height:40px; border-radius:12px;
-      background: conic-gradient(from 220deg, var(--accent), var(--accent-2));
-      filter: saturate(1.2);
-    }
-    .brand h1{
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      margin:0; letter-spacing:.4px;
-    }
-    .controls{
-      display:grid;
-      gap:var(--gap);
-      grid-template-columns: 1fr minmax(170px, 220px) minmax(170px, 220px) auto;
-      align-items:center;
-      width:100%;
-    }
-    .toolbar{
-      display:flex; gap:var(--gap); flex-wrap:wrap; align-items:center; justify-content:flex-end;
-    }
-    .chip{
-      padding:6px 10px; border-radius:999px; border:1px solid var(--glass);
-      background: linear-gradient( to bottom right, var(--glass), transparent);
-      backdrop-filter: blur(10px);
-      white-space:nowrap; font-variant-numeric: tabular-nums;
-    }
-    .muted{ color:var(--muted);}
-    input, select, button{
-      width:100%;
-      appearance:none;
-      color:var(--text);
-      background: linear-gradient( to bottom right, var(--glass), transparent);
-      border:1px solid var(--glass);
-      border-radius: var(--radius-sm);
-      padding:12px 14px;
-      outline:none;
-      box-shadow: inset 0 -30px 50px hsl(0 0% 100% / .02);
-    }
-    input::placeholder{color:var(--muted)}
-    button{
-      cursor:pointer; font-weight:700; letter-spacing:.2px;
-      transition: transform .1s ease, filter .2s ease, background .2s ease;
-    }
-    button:hover{ transform: translateY(-1px); filter: brightness(1.05); }
-    .grid{
-      display:grid; gap:var(--gap);
-      grid-template-columns: repeat( auto-fill, minmax(260px, 1fr) );
-      margin-top: 18px;
-    }
-    .card{
-      position:relative; overflow:hidden; border-radius: var(--radius);
-      background: linear-gradient( to bottom right, var(--card), transparent );
-      border:1px solid var(--glass);
-      box-shadow: var(--shadow);
-      display:flex; flex-direction:column;
-    }
-    .thumb{
-      aspect-ratio: 16/9; width:100%; object-fit:cover;
-      background: #222;
-      border-bottom: 1px solid var(--glass);
-    }
-    .content{ padding:14px; display:flex; flex-direction:column; gap:10px; }
-    .title{ font-weight:800; line-height:1.2; font-size:1.05rem}
-    .desc{
-      color:var(--muted); font-size:.92rem; max-height: 4.4em; overflow:hidden;
-      display:-webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;
-    }
-    .meta{
-      display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:4px;
-    }
-    .pill{
-      padding:6px 10px; border-radius:999px; border:1px solid var(--glass);
-      background: linear-gradient(to bottom right, var(--glass), transparent);
-      font-variant-numeric: tabular-nums;
-    }
-    .pill.players{ border-color: hsl(150 70% 40% / .35);}
-    .pill.new{ border-color: hsl(200 90% 50% / .35);}
-    .pill.updated{ border-color: hsl(35 90% 50% / .35); }
-    .footer{
-      display:flex; gap:10px; margin-top:auto; align-items:center; justify-content:space-between; padding:12px 14px; border-top:1px solid var(--glass);
-      background: linear-gradient( to top left, var(--glass), transparent );
-    }
-    .skel{
-      animation: pulse 1.2s ease-in-out infinite;
-      background: linear-gradient(90deg, hsl(0 0% 100% / .06), hsl(0 0% 100% / .12), hsl(0 0% 100% / .06));
-      background-size:200% 100%;
-    }
-    @keyframes pulse{ from{background-position:0 0} to{background-position:200% 0}}
-    .empty{
-      border:1px dashed var(--glass);
-      border-radius: var(--radius);
-      padding:40px;
-      text-align:center;
-      color:var(--muted);
-    }
-    .kpi{
-      display:flex; gap:var(--gap); flex-wrap:wrap;
-      margin: 12px 0 6px;
-    }
-    .kpi .tile{
-      flex:1 1 180px;
-      padding:12px 14px;
-      border-radius:var(--radius);
-      border:1px solid var(--glass);
-      background: linear-gradient( to bottom right, var(--glass), transparent);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-    }
-    .tile .label{ font-size:.8rem; color:var(--muted); margin-bottom:6px}
-    .tile .value{ font-size:1.2rem; font-weight:800}
-    .danger{ color: var(--err)}
-    .ok{ color: var(--ok)}
-    .warn{ color: var(--warn)}
-    .link{
-      text-decoration:none; color:inherit; border-bottom:1px dashed var(--accent);
-    }
-    .sr-only{ position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0;}
+    .wrapper{max-width:1200px;margin:0 auto;padding:20px;}
+    header{display:flex;gap:var(--gap);align-items:center;justify-content:space-between;margin-bottom:20px;}
+    .brand{display:flex;align-items:center;gap:.9rem;padding:10px 14px;background:linear-gradient(to bottom right,var(--glass),transparent);backdrop-filter:blur(12px);border:1px solid var(--glass);border-radius:var(--radius);box-shadow:var(--shadow);}
+    .logo{width:40px;height:40px;border-radius:12px;background:conic-gradient(from 220deg,var(--accent),var(--accent-2));}
+    .brand h1{font-size:clamp(1rem,2vw,1.25rem);margin:0;}
+    .controls{display:grid;gap:var(--gap);grid-template-columns:1fr minmax(170px,220px) minmax(170px,220px) auto;align-items:center;width:100%;}
+    input,select,button{width:100%;appearance:none;color:var(--text);background:linear-gradient(to bottom right,var(--glass),transparent);border:1px solid var(--glass);border-radius:var(--radius-sm);padding:12px 14px;outline:none;}
+    input::placeholder{color:var(--muted);}
+    button{cursor:pointer;font-weight:700;transition:.2s;}
+    button:hover{filter:brightness(1.1);}
+    .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-top:18px;}
+    .card{overflow:hidden;border-radius:var(--radius);background:linear-gradient(to bottom right,var(--card),transparent);border:1px solid var(--glass);box-shadow:var(--shadow);display:flex;flex-direction:column;}
+    .thumb{aspect-ratio:16/9;width:100%;object-fit:cover;background:#222;}
+    .content{padding:14px;display:flex;flex-direction:column;gap:10px;}
+    .title{font-weight:800;line-height:1.2;font-size:1.05rem}
+    .desc{color:var(--muted);font-size:.92rem;max-height:4.4em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+    .pill{padding:6px 10px;border-radius:999px;border:1px solid var(--glass);background:linear-gradient(to bottom right,var(--glass),transparent);}
+    .footer{display:flex;gap:10px;margin-top:auto;justify-content:space-between;padding:12px 14px;border-top:1px solid var(--glass);}
+    .empty{border:1px dashed var(--glass);border-radius:var(--radius);padding:40px;text-align:center;color:var(--muted);}
+    .kpi{display:flex;gap:var(--gap);flex-wrap:wrap;margin:12px 0 6px;}
+    .kpi .tile{flex:1 1 180px;padding:12px 14px;border-radius:var(--radius);border:1px solid var(--glass);background:linear-gradient(to bottom right,var(--glass),transparent);box-shadow:var(--shadow);}
+    .tile .label{font-size:.8rem;color:var(--muted);margin-bottom:6px}
+    .tile .value{font-size:1.2rem;font-weight:800}
   </style>
 </head>
 <body>
   <div class="wrapper">
     <header>
-      <div class="brand" aria-label="exoliner baiter">
-        <div class="logo" aria-hidden="true"></div>
-        <h1>exoliner baiter</h1>
-      </div>
-
-      <div class="controls" role="search">
-        <input id="q" type="search" placeholder="Search name or description…" autocomplete="off" spellcheck="false" />
+      <div class="brand"><div class="logo"></div><h1>exoliner baiter</h1></div>
+      <div class="controls">
+        <input id="q" type="search" placeholder="Search…" />
         <select id="sort">
-          <option value="players:desc">Sort: Players ↓</option>
-          <option value="players:asc">Sort: Players ↑</option>
-          <option value="createdAt:desc">Sort: Newest created</option>
-          <option value="createdAt:asc">Sort: Oldest created</option>
-          <option value="lastUpdated:desc">Sort: Recently updated</option>
-          <option value="lastUpdated:asc">Sort: Least recently updated</option>
-          <option value="name:asc">Sort: Name A→Z</option>
-          <option value="name:desc">Sort: Name Z→A</option>
+          <option value="players:desc">Players ↓</option>
+          <option value="players:asc">Players ↑</option>
+          <option value="createdAt:desc">Newest</option>
+          <option value="createdAt:asc">Oldest</option>
         </select>
         <select id="playersFilter">
-          <option value="all">Players filter: All</option>
-          <option value="gt0">> 0 online</option>
-          <option value="gte50">≥ 50 online</option>
-          <option value="gte100">≥ 100 online</option>
+          <option value="all">All players</option>
+          <option value="gt0">> 0</option>
+          <option value="gte50">≥ 50</option>
+          <option value="gte100">≥ 100</option>
         </select>
-        <button id="liveBtn" aria-pressed="true" title="Toggle auto-refresh">Live: ON</button>
+        <button id="liveBtn" aria-pressed="true">Live: ON</button>
       </div>
     </header>
 
-    <section class="kpi" aria-live="polite">
-      <div class="tile"><div class="label">Total Experiences</div><div id="kpiTotal" class="value skel">—</div></div>
-      <div class="tile"><div class="label">Players Online (sum)</div><div id="kpiSumPlayers" class="value skel">—</div></div>
-      <div class="tile"><div class="label">Avg Players / Experience</div><div id="kpiAvg" class="value skel">—</div></div>
-      <div class="tile"><div class="label">Last Sync</div><div id="kpiSync" class="value skel">—</div></div>
+    <section class="kpi">
+      <div class="tile"><div class="label">Total</div><div id="kpiTotal" class="value">—</div></div>
+      <div class="tile"><div class="label">Players Online</div><div id="kpiSumPlayers" class="value">—</div></div>
+      <div class="tile"><div class="label">Avg Players</div><div id="kpiAvg" class="value">—</div></div>
+      <div class="tile"><div class="label">Last Sync</div><div id="kpiSync" class="value">—</div></div>
     </section>
 
-    <div id="grid" class="grid" aria-live="polite" aria-busy="true"></div>
-
-    <div id="empty" class="empty" hidden>
-      <p>No results. Try clearing filters or changing your search.</p>
-    </div>
+    <div id="grid" class="grid"></div>
+    <div id="empty" class="empty" hidden>No results.</div>
 
     <template id="cardTemplate">
       <article class="card">
@@ -229,35 +108,21 @@
           <div class="title"></div>
           <div class="desc"></div>
           <div class="meta">
-            <div class="pill players" title="Players online">👥 <span class="players">0</span></div>
-            <div class="pill new" title="Created at">🆕 <span class="created">—</span></div>
-            <div class="pill updated" title="Last updated">🛠️ <span class="updated">—</span></div>
+            <div class="pill">👥 <span class="players">0</span></div>
+            <div class="pill">🆕 <span class="created">—</span></div>
+            <div class="pill">🛠️ <span class="updated">—</span></div>
           </div>
         </div>
-        <div class="footer">
-          <div class="muted id"></div>
-          <a class="link" target="_blank" rel="noopener" title="Open thumbnail">Open image</a>
-        </div>
+        <div class="footer"><div class="id"></div><a class="link" target="_blank">Open</a></div>
       </article>
     </template>
   </div>
 
   <script>
-    // ====== CONFIG ======
-    // If your JSON is local: put the file next to this HTML and keep this path.
-    // If it’s an API, change to your endpoint URL (must allow CORS on browsers).
-    const JSON_URL = "./full_gamelist_dump.json";
+    const JSON_URL = "https://raw.githubusercontent.com/chasekek/exolinerdata/refs/heads/main/full_gamelist_dump.json";
+    const REFRESH_MS = 30000;
+    let RAW = [], filtered = [], live = true, timer = null;
 
-    // How often to auto-refresh (ms)
-    const REFRESH_MS = 30_000;
-
-    // ====== STATE ======
-    let RAW = [];
-    let filtered = [];
-    let live = true;
-    let timer = null;
-
-    // ====== ELEMENTS ======
     const grid = document.getElementById("grid");
     const empty = document.getElementById("empty");
     const tpl = document.getElementById("cardTemplate");
@@ -270,200 +135,74 @@
     const kpiAvg = document.getElementById("kpiAvg");
     const kpiSync = document.getElementById("kpiSync");
 
-    // ====== UTIL ======
-    const fmtInt = (n)=> new Intl.NumberFormat().format(n ?? 0);
-    const fmtDateTime = (s)=>{
-      if(!s) return "—";
-      const d = new Date(s);
-      if(isNaN(d)) return "—";
-      return new Intl.DateTimeFormat(undefined, {
-        year:"numeric", month:"short", day:"2-digit",
-        hour:"2-digit", minute:"2-digit"
-      }).format(d);
-    };
-    const clampTxt = (str, max=240)=>{
-      if(!str) return "";
-      const clean = String(str).replace(/\s+/g," ").trim();
-      return clean.length > max ? clean.slice(0,max-1)+"…" : clean;
-    };
-    const get = (o,k,def=null)=> (o && k in o) ? o[k] : def;
+    const fmtInt = n=>new Intl.NumberFormat().format(n||0);
+    const fmtDateTime=s=>s?new Date(s).toLocaleString():"—";
 
-    const debounce = (fn,ms=250)=>{
-      let id; return (...a)=>{ clearTimeout(id); id=setTimeout(()=>fn(...a),ms); };
-    };
-
-    // ====== FETCH & PIPELINE ======
     async function fetchJSON(){
-      grid.setAttribute("aria-busy","true");
       try{
-        const url = JSON_URL + (JSON_URL.includes("?") ? "&" : "?") + "_ts=" + Date.now();
-        const res = await fetch(url, { cache: "no-store" });
-        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        const res = await fetch(JSON_URL+"?_ts="+Date.now());
         const data = await res.json();
-
-        // Support either { data: [...] } or a raw array
-        RAW = Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : []);
-        if(!Array.isArray(RAW)) RAW = [];
-
-        kpiSync.textContent = new Date().toLocaleTimeString();
-        kpiSync.classList.remove("skel");
-        kpiTotal.classList.add("skel"); // quick flash for KPI update
-        kpiSumPlayers.classList.add("skel");
-        kpiAvg.classList.add("skel");
-
+        RAW = Array.isArray(data)?data:(Array.isArray(data?.data)?data.data:[]);
         applyFilters();
-      }catch(err){
-        console.error(err);
-        grid.innerHTML = "";
-        empty.hidden = false;
-        empty.innerHTML = `<p class="danger">Failed to load data. ${err?.message || "Unknown error"}</p>
-          <p class="muted">Check the <span class="chip">JSON_URL</span>, CORS, or network.</p>`;
-      }finally{
-        grid.removeAttribute("aria-busy");
-      }
+        kpiSync.textContent = new Date().toLocaleTimeString();
+      }catch(e){console.error(e);}
     }
 
     function applyFilters(){
-      const term = q.value.trim().toLowerCase();
-      const pf = playersFilter.value;
-
-      filtered = RAW.filter(row=>{
-        const name = (row.name ?? "").toLowerCase();
-        const desc = (row.description ?? "").toLowerCase();
-        const hay = name + " " + desc;
-        const passTerm = term ? hay.includes(term) : true;
-
-        const p = Number(row.players ?? 0);
-        let passPlayers = true;
-        if(pf==="gt0") passPlayers = p > 0;
-        else if(pf==="gte50") passPlayers = p >= 50;
-        else if(pf==="gte100") passPlayers = p >= 100;
-
-        return passTerm && passPlayers;
+      const term=q.value.toLowerCase(), pf=playersFilter.value;
+      filtered=RAW.filter(r=>{
+        const hay=(r.name+" "+(r.description||"")).toLowerCase();
+        const passTerm=term?hay.includes(term):true;
+        const p=+r.players||0;
+        let passPlayers=true;
+        if(pf==="gt0")passPlayers=p>0;
+        else if(pf==="gte50")passPlayers=p>=50;
+        else if(pf==="gte100")passPlayers=p>=100;
+        return passTerm&&passPlayers;
       });
-
-      sortNow();
-      render();
-      updateKPIs();
+      sortNow(); render(); updateKPIs();
     }
-
     function sortNow(){
-      const [key,dir] = sortSel.value.split(":"); // e.g. "players:desc"
-      const dirMul = dir==="desc" ? -1 : 1;
-      filtered.sort((a,b)=>{
-        const va = get(a,key);
-        const vb = get(b,key);
-        if(key==="players"){
-          return ((Number(va)||0) - (Number(vb)||0)) * dirMul;
-        }
-        if(key==="createdAt" || key==="lastUpdated"){
-          const da = new Date(va ?? 0).getTime() || 0;
-          const db = new Date(vb ?? 0).getTime() || 0;
-          return (da - db) * dirMul;
-        }
-        // name fallback
-        return String(va ?? "").localeCompare(String(vb ?? ""), undefined, { sensitivity:"base" }) * dirMul;
-      });
+      const [key,dir]=sortSel.value.split(":");
+      const d=dir==="desc"?-1:1;
+      filtered.sort((a,b)=>((+a[key]||0)-(+b[key]||0))*d);
     }
-
     function updateKPIs(){
-      const total = filtered.length;
-      const sum = filtered.reduce((acc,r)=> acc + (Number(r.players)||0), 0);
-      kpiTotal.textContent = fmtInt(total);
-      kpiSumPlayers.textContent = fmtInt(sum);
-      kpiAvg.textContent = total ? fmtInt(Math.round(sum/total)) : "0";
-      kpiTotal.classList.remove("skel");
-      kpiSumPlayers.classList.remove("skel");
-      kpiAvg.classList.remove("skel");
+      const t=filtered.length, sum=filtered.reduce((a,r)=>a+(+r.players||0),0);
+      kpiTotal.textContent=fmtInt(t);
+      kpiSumPlayers.textContent=fmtInt(sum);
+      kpiAvg.textContent=t?fmtInt(Math.round(sum/t)):0;
     }
-
     function render(){
-      grid.innerHTML = "";
-      if(!filtered.length){
-        empty.hidden = false;
-        return;
-      }
-      empty.hidden = true;
-
-      const frag = document.createDocumentFragment();
-      for(const row of filtered){
-        const node = tpl.content.firstElementChild.cloneNode(true);
-
-        const img = node.querySelector(".thumb");
-        const title = node.querySelector(".title");
-        const desc = node.querySelector(".desc");
-        const players = node.querySelector(".players");
-        const created = node.querySelector(".created");
-        const updated = node.querySelector(".updated");
-        const idEl = node.querySelector(".id");
-        const link = node.querySelector(".link");
-
-        const name = String(row.name ?? "Untitled");
-        const description = clampTxt(row.description ?? "");
-        const thumb = row.thumbnail || "";
-        const playersNum = Number(row.players || 0);
-        const createdAt = row.createdAt || row.created_at;
-        const lastUpdated = row.lastUpdated || row.updated_at;
-        const id = row.id || row.jobid || "(no id)";
-
-        img.src = thumb;
-        img.alt = name;
-
-        title.textContent = name;
-        desc.textContent = description || "—";
-
-        players.textContent = fmtInt(playersNum);
-        created.textContent = fmtDateTime(createdAt);
-        updated.textContent = fmtDateTime(lastUpdated);
-
-        idEl.textContent = String(id);
-        link.href = thumb || "#";
-
-        frag.appendChild(node);
+      grid.innerHTML="";
+      if(!filtered.length){empty.hidden=false;return}else empty.hidden=true;
+      const frag=document.createDocumentFragment();
+      for(const r of filtered){
+        const n=tpl.content.firstElementChild.cloneNode(true);
+        n.querySelector(".thumb").src=r.thumbnail||"";
+        n.querySelector(".thumb").alt=r.name;
+        n.querySelector(".title").textContent=r.name;
+        n.querySelector(".desc").textContent=r.description||"—";
+        n.querySelector(".players").textContent=fmtInt(r.players);
+        n.querySelector(".created").textContent=fmtDateTime(r.createdAt);
+        n.querySelector(".updated").textContent=fmtDateTime(r.lastUpdated);
+        n.querySelector(".id").textContent=r.id||"";
+        n.querySelector(".link").href=r.thumbnail||"#";
+        frag.appendChild(n);
       }
       grid.appendChild(frag);
     }
-
     function toggleLive(){
-      live = !live;
-      liveBtn.setAttribute("aria-pressed", String(live));
-      liveBtn.textContent = `Live: ${live ? "ON" : "OFF"}`;
-      if(live){
-        startTimer();
-      }else{
-        stopTimer();
-      }
+      live=!live;liveBtn.textContent="Live: "+(live?"ON":"OFF");
+      if(live)startTimer();else stopTimer();
     }
-
-    function startTimer(){
-      stopTimer();
-      timer = setInterval(fetchJSON, REFRESH_MS);
-    }
-    function stopTimer(){
-      if(timer){ clearInterval(timer); timer = null; }
-    }
-
-    // ====== EVENTS ======
-    q.addEventListener("input", debounce(applyFilters, 200));
-    sortSel.addEventListener("change", applyFilters);
-    playersFilter.addEventListener("change", applyFilters);
-    liveBtn.addEventListener("click", toggleLive);
-    document.addEventListener("visibilitychange", ()=>{
-      // Pause refresh when tab hidden; resume when visible if live is ON.
-      if(document.hidden){ stopTimer(); }
-      else if(live){ startTimer(); }
-    });
-
-    // Keyboard find focus
-    document.addEventListener("keydown", (e)=>{
-      if(e.key === "/" && document.activeElement !== q){
-        e.preventDefault(); q.focus();
-      }
-    });
-
-    // ====== BOOT ======
-    fetchJSON();
-    startTimer();
+    function startTimer(){stopTimer();timer=setInterval(fetchJSON,REFRESH_MS);}
+    function stopTimer(){if(timer)clearInterval(timer);}
+    q.addEventListener("input",()=>applyFilters());
+    sortSel.addEventListener("change",applyFilters);
+    playersFilter.addEventListener("change",applyFilters);
+    liveBtn.addEventListener("click",toggleLive);
+    fetchJSON(); startTimer();
   </script>
 </body>
 </html>
